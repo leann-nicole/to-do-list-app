@@ -1,29 +1,48 @@
-import React from "react";
-import {Text, TouchableOpacity, View, StyleSheet} from "react-native";
+import React, {useState} from "react";
+import {Text, View, StyleSheet, TouchableWithoutFeedback} from "react-native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import CheckBox from "@react-native-community/checkbox";
 
 export default function TaskItem({item, pressHandler}) {
+    const [toggleCheckBox, setToggleCheckBox] = useState(false);
+
     return (
         <View style={styles.item}>
-            <Text style={styles.itemText}>{item.text}</Text>
-            <TouchableOpacity onPress={() => pressHandler(item.key)} style={styles.deleteIconContainer}>
-                <MaterialIcons name="clear" size={12} />
-            </TouchableOpacity>
+            <View style={styles.checkBoxTextPair}>
+                <CheckBox
+                    disabled={false}
+                    value={toggleCheckBox}
+                    onValueChange={(newValue) => setToggleCheckBox(newValue)}
+                />
+                <Text style={styles.itemText}>{item.text}</Text>    
+            </View>
+            <TouchableWithoutFeedback onPress={() => pressHandler(item.key)} style={styles.deleteIconContainer}>
+                <MaterialIcons name="clear" size={15} />
+            </TouchableWithoutFeedback>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     item: {
-        height: 50,
+        minHeight: 50,
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
         borderBottomWidth: 1,
         borderColor: "#eee"
     },
+    checkBoxTextPair: {
+        flexDirection: "row",
+        alignItems: "center",
+        flex: .90,
+    },
     itemText: {
-        fontFamily: "Poppins-Regular"
+        flex: 1,
+        fontFamily: "Poppins-Regular",
+        marginLeft: 10,
+        marginVertical: 15,
+        flexWrap: "wrap"
     },
     deleteIconContainer: {
         justifyContent: "center",

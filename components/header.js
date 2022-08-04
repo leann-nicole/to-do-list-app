@@ -11,11 +11,9 @@ export default function Header() {
 
 const styles = StyleSheet.create({
     header: {
-        height: 70,
+        height: 80,
         justifyContent: "flex-end",
-        paddingHorizontal: 20,
-        borderBottomWidth: 1,
-        borderColor: "#ccc",
+        paddingHorizontal: 20
     },
     title: {
         fontSize: 30,
